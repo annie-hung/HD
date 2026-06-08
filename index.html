@@ -15,14 +15,9 @@
       --border: #e0ddd7;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
-    html, body {
-      margin: 0;
-      padding: 0;
-    }
+    html, body { margin: 0; padding: 0; }
 
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Noto Sans TC", sans-serif;
@@ -70,22 +65,16 @@
       margin: 22px 0 10px;
     }
 
-    p {
-      margin: 0 0 10px;
-    }
+    p { margin: 0 0 10px; }
 
-    strong {
-      font-weight: 600;
-    }
+    strong { font-weight: 600; }
 
     ul {
       margin: 0 0 12px 1.2em;
       padding: 0;
     }
 
-    li {
-      margin-bottom: 4px;
-    }
+    li { margin-bottom: 4px; }
 
     .highlight-box {
       margin: 16px 0 18px;
@@ -108,18 +97,14 @@
     }
 
     /* form */
-    #hd-input p {
-      margin-bottom: 8px;
-    }
+    #hd-input p { margin-bottom: 8px; }
 
     #hd-input label {
       font-weight: 600;
       font-size: 0.95rem;
     }
 
-    .field {
-      margin: 8px 0 10px;
-    }
+    .field { margin: 8px 0 10px; }
 
     input {
       width: 100%;
@@ -182,15 +167,9 @@
     }
 
     @media (min-width: 900px) {
-      main {
-        padding: 40px 24px 48px;
-      }
-      article {
-        padding: 32px 30px 38px;
-      }
-      h1 {
-        font-size: 2.1rem;
-      }
+      main { padding: 40px 24px 48px; }
+      article { padding: 32px 30px 38px; }
+      h1 { font-size: 2.1rem; }
     }
   </style>
 </head>
@@ -202,7 +181,7 @@
         <h1>一場關於自我覺醒的繪本旅程</h1>
       </header>
 
-      <!-- 繪本內文（來自你原本 auto 版） -->
+      <!-- 原本繪本文案 -->
       <section>
         <p>1987 年 1 月，在西班牙伊比薩島的一個靜謐夜晚，<strong>一個男人聽見了宇宙的聲音</strong>。</p>
         <p>他的名字叫 Ra Uru Hu。在連續八天八夜裡，他接收到一套完整的知識系統——將中國易經、西方占星、印度脈輪、猶太卡巴拉融為一體。</p>
@@ -244,4 +223,107 @@
         <p>現在，是時候<strong>翻開屬於你的那一頁</strong>了。</p>
         <p>只需要提供你的出生時間與地點，我將為你解讀專屬於你的能量藍圖。</p>
         <p>準備好了嗎？讓我們一起探索你的人類圖故事。</p>
-        <p class="muted">請提供準確的出生時間與地點。時間誤差建議在 ±30 分鐘內，
+        <p class="muted">請提供準確的出生時間與地點。時間誤差建議在 ±30 分鐘內，才能獲得最精準的解讀。</p>
+      </section>
+
+      <hr />
+
+      <!-- 表單 + 結果區，取代「複製貼到對話框」 -->
+      <section id="hd-input">
+        <p><strong>✦ 把這些線索交給宇宙：</strong></p>
+
+        <form id="hd-form">
+          <p class="field">
+            <label>姓名<br />
+              <input name="name" required />
+            </label>
+          </p>
+          <p class="field">
+            <label>出生日期（YYYY-MM-DD）<br />
+              <input name="dob" placeholder="1994-08-17" required />
+            </label>
+          </p>
+          <p class="field">
+            <label>出生時間（HH:MM）<br />
+              <input name="tob" placeholder="09:30" required />
+            </label>
+          </p>
+          <p class="field">
+            <label>出生地（城市＋國家）<br />
+              <input name="place" placeholder="例：台北，台灣" required />
+            </label>
+          </p>
+          <p class="field">
+            <label>此刻你最在意的主題（選填）<br />
+              <input name="life_focus" placeholder="例如：事業、自我方向、關係、身心狀態…" />
+            </label>
+          </p>
+
+          <p>
+            <button type="submit" id="submit-btn">
+              ✦ 送出給宇宙，請它寫一封信給我
+            </button>
+          </p>
+
+          <p id="status" class="muted"></p>
+        </form>
+      </section>
+
+      <section id="hd-result">
+        <h2>你的能量藍圖故事</h2>
+        <div id="result" class="muted">
+          等你把上面的線索交出去，這裡就會出現一封，只寫給你的故事信。
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <script>
+    // 換成你自己的 Apps Script Web App /exec URL
+    const BACKEND_URL = 'https://script.google.com/macros/s/AKfycbzpcf6IlayWl4J3vNpQ5vrrpTWeFyw9hhMTZzAG-CjKa1GYT-zCY6WPrRAqrg1MPgGf/exec';
+
+    const form = document.getElementById('hd-form');
+    const statusEl = document.getElementById('status');
+    const resultEl = document.getElementById('result');
+    const btn = document.getElementById('submit-btn');
+
+    if (form) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        statusEl.textContent = '宇宙正在翻閱你的能量藍圖，請稍等片刻…';
+        resultEl.textContent = '';
+        btn.disabled = true;
+
+        try {
+          const res = await fetch(BACKEND_URL, {
+            method: 'POST',
+            body: formData
+          });
+
+          const data = await res.json();
+
+          if (!data.ok) {
+            statusEl.textContent = '';
+            resultEl.textContent =
+              '目前無法取得解讀：' + (data.error || '未知錯誤，請稍後再試。');
+            return;
+          }
+
+          statusEl.textContent =
+            '已由模型 ' + data.model + ' 完成解讀，你可以慢慢讀完這封信。';
+          resultEl.textContent = data.text;
+          resultEl.classList.remove('muted');
+        } catch (err) {
+          console.error(err);
+          statusEl.textContent = '';
+          resultEl.textContent = '連線後端時發生錯誤，請稍後再試一次。';
+        } finally {
+          btn.disabled = false;
+        }
+      });
+    }
+  </script>
+</body>
+</html>
