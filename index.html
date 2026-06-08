@@ -13,7 +13,6 @@
       --primary: #01696f;
       --primary-dark: #0c4e54;
       --border: #e0ddd7;
-      --radius-card: 20px;
     }
 
     * {
@@ -39,41 +38,20 @@
 
     main {
       width: 100%;
-      max-width: 880px;
+      max-width: 840px;
       padding: 32px 16px 40px;
     }
 
-    .page-card {
+    article {
       background: var(--card);
-      border-radius: var(--radius-card);
+      border-radius: 20px;
+      padding: 28px 22px 32px;
       box-shadow:
         0 18px 45px rgba(0, 0, 0, 0.06),
         0 0 0 0.5px rgba(255, 255, 255, 0.6);
-      padding: 28px 22px 32px;
-      position: relative;
-      overflow: hidden;
     }
 
-    .page-card::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background:
-        radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.9) 0, transparent 48%),
-        radial-gradient(circle at 100% 20%, rgba(1, 105, 111, 0.08) 0, transparent 50%),
-        radial-gradient(circle at 10% 100%, rgba(212, 184, 136, 0.2) 0, transparent 55%);
-      opacity: 0;
-      transform: scale(1.06);
-      transition: opacity 1200ms ease-out, transform 1200ms ease-out;
-      z-index: -1;
-    }
-
-    .page-card.ready::before {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    .header-eyebrow {
+    .eyebrow {
       font-size: 0.78rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
@@ -89,7 +67,7 @@
 
     h2 {
       font-size: 1.3rem;
-      margin: 24px 0 12px;
+      margin: 22px 0 10px;
     }
 
     p {
@@ -101,7 +79,7 @@
     }
 
     ul {
-      margin: 0 0 14px 1.2em;
+      margin: 0 0 12px 1.2em;
       padding: 0;
     }
 
@@ -130,21 +108,23 @@
     }
 
     /* form */
-    form label {
-      display: block;
+    #hd-input p {
+      margin-bottom: 8px;
+    }
+
+    #hd-input label {
       font-weight: 600;
-      font-size: 0.96rem;
-      margin-bottom: 4px;
+      font-size: 0.95rem;
     }
 
     .field {
-      margin: 10px 0 12px;
+      margin: 8px 0 10px;
     }
 
     input {
       width: 100%;
-      padding: 8px 10px;
-      border-radius: 11px;
+      padding: 7px 10px;
+      border-radius: 10px;
       border: 1px solid var(--border);
       font-size: 0.95rem;
       outline: none;
@@ -162,8 +142,7 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      margin-top: 8px;
-      padding: 9px 18px;
+      padding: 8px 16px;
       border-radius: 999px;
       border: none;
       font-size: 0.95rem;
@@ -173,10 +152,6 @@
       cursor: pointer;
       box-shadow: 0 10px 25px rgba(1, 105, 111, 0.32);
       transition: transform 0.16s ease, box-shadow 0.16s ease, opacity 0.16s ease;
-    }
-
-    button span.sparkle {
-      font-size: 1.05rem;
     }
 
     button:hover:not(:disabled) {
@@ -206,47 +181,32 @@
       font-size: 0.96rem;
     }
 
-    .result-placeholder {
-      padding-top: 4px;
-    }
-
-    /* simple fade-in animation for sections */
-    .fade-section {
-      opacity: 0;
-      transform: translateY(12px);
-      transition: opacity 700ms ease-out, transform 700ms ease-out;
-    }
-
-    .fade-section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
     @media (min-width: 900px) {
       main {
         padding: 40px 24px 48px;
       }
+      article {
+        padding: 32px 30px 38px;
+      }
       h1 {
         font-size: 2.1rem;
-      }
-      .page-card {
-        padding: 32px 30px 38px;
       }
     }
   </style>
 </head>
 <body>
   <main>
-    <article class="page-card" id="page">
-      <header class="fade-section">
-        <div class="header-eyebrow">HUMAN DESIGN STORYBOOK</div>
+    <article>
+      <header>
+        <div class="eyebrow">HUMAN DESIGN STORYBOOK</div>
         <h1>一場關於自我覺醒的繪本旅程</h1>
       </header>
 
-      <section class="fade-section">
+      <!-- 繪本內文（來自你原本 auto 版） -->
+      <section>
         <p>1987 年 1 月，在西班牙伊比薩島的一個靜謐夜晚，<strong>一個男人聽見了宇宙的聲音</strong>。</p>
         <p>他的名字叫 Ra Uru Hu。在連續八天八夜裡，他接收到一套完整的知識系統——將中國易經、西方占星、印度脈輪、猶太卡巴拉融為一體。</p>
-        <p>這就是<strong>人類圖</strong>的誕生，一張能夠解讀每個人獨特能量密碼的地圖。</p>
+        <p>這就是<strong>人類圖</strong> 的誕生。一張能夠解讀每個人獨特能量密碼的地圖。</p>
 
         <p>人類圖不是憑空創造的系統，而是<strong>四個古老智慧的完美融合</strong>：</p>
         <ul>
@@ -266,140 +226,22 @@
           <li><strong>人生角色</strong> — 你在這世界扮演的劇本</li>
         </ul>
 
-        <p>當你了解自己的設計，你就不再需要模擬別人——因為<strong>你本身就是答案</strong>。</p>
+        <p>當你了解自己的設計，你就不再需要模仿別人——因為<strong>你本身就是答案</strong>。</p>
 
         <div class="highlight-box">
           <p>你是否曾感覺，無論多努力，生活總像在<strong>逆流而上</strong>？</p>
           <p>或者別人的建議對你來說總是「怪怪的」，卻說不上哪裡不對？</p>
-          <p>那是因為你可能一直在<strong>用別人的方式過自己的人生</strong>。</p>
+          <p>那是因為你可能在<strong>用別人的方式過自己的人生</strong>。</p>
         </div>
 
-        <p>人類圖想幫你，回答三個核心問題：</p>
+        <p>人類圖幫助你回答三個核心問題：</p>
         <ul>
-          <li><strong>「我是誰？」</strong> — 認識你的能量本質</li>
-          <li><strong>「我該如何做決定？」</strong> — 找到你的內在指南針</li>
-          <li><strong>「我的天賦是什麼？」</strong> — 發揮你獨特的力量</li>
+          <li><strong>「我是誰？」</strong> 認識你的能量本質</li>
+          <li><strong>「我該如何做決定？」</strong> 找到你的內在指南針</li>
+          <li><strong>「我的天賦是什麼？」</strong> 發揮你獨特的力量</li>
         </ul>
 
         <p>現在，是時候<strong>翻開屬於你的那一頁</strong>了。</p>
-      </section>
-
-      <section class="fade-section">
-        <hr />
-        <h2>把線索交給宇宙</h2>
-        <p>只需要提供你的出生時間與地點，我會請宇宙，為你寫下專屬於你的能量藍圖故事。</p>
-        <p class="muted">時間誤差建議在 ±30 分鐘內，能讓故事更貼近你當時的能量狀態。</p>
-
-        <form id="hd-form">
-          <div class="field">
-            <label>姓名</label>
-            <input name="name" required>
-          </div>
-          <div class="field">
-            <label>出生日期（YYYY-MM-DD）</label>
-            <input name="dob" placeholder="1994-08-17" required>
-          </div>
-          <div class="field">
-            <label>出生時間（HH:MM）</label>
-            <input name="tob" placeholder="09:30" required>
-          </div>
-          <div class="field">
-            <label>出生地（城市＋國家）</label>
-            <input name="place" placeholder="例：台北，台灣" required>
-          </div>
-          <div class="field">
-            <label>此刻你最在意的主題（選填）</label>
-            <input name="life_focus" placeholder="例如：事業、自我方向、關係、身心狀態…">
-          </div>
-
-          <button type="submit" id="submit-btn">
-            <span class="sparkle">✦</span>
-            送出給宇宙，請它寫一封信給我
-          </button>
-
-          <div id="status" class="muted"></div>
-        </form>
-      </section>
-
-      <section class="fade-section">
-        <hr />
-        <h2>你的能量藍圖故事</h2>
-        <div id="result" class="muted result-placeholder">
-          等你把上面的線索交出去，這裡就會出現一封，只寫給你的故事信。
-        </div>
-      </section>
-    </article>
-  </main>
-
-  <script>
-    // ====== 1. 頁面進場與滾動淡入效果 ======
-    window.addEventListener('load', () => {
-      const page = document.getElementById('page');
-      if (page) page.classList.add('ready');
-
-      const sections = document.querySelectorAll('.fade-section');
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.15 }
-      );
-
-      sections.forEach((sec) => observer.observe(sec));
-    });
-
-    // ====== 2. 呼叫後端 API（Apps Script Web App） ======
-    // TODO：改成你自己的 Web App /exec URL
-    const BACKEND_URL = 'https://script.google.com/macros/s/AKfycbwMxb4GtIvXdOPW8JgvJO_T5WcBJOek3xurFdu2bc7knpn7s-yDVuWMzgtLraC6wod0/exec';
-
-    const form = document.getElementById('hd-form');
-    const statusEl = document.getElementById('status');
-    const resultEl = document.getElementById('result');
-    const btn = document.getElementById('submit-btn');
-
-    if (form) {
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        const formData = new FormData(form);
-        statusEl.textContent = '宇宙正在翻閱你的能量藍圖，請稍等片刻…';
-        resultEl.textContent = '';
-        resultEl.classList.remove('muted', 'result-placeholder');
-        btn.disabled = true;
-
-        try {
-          const res = await fetch(BACKEND_URL, {
-            method: 'POST',
-            body: formData
-          });
-
-          const data = await res.json();
-
-          if (!data.ok) {
-            statusEl.textContent = '';
-            resultEl.textContent =
-              '目前無法取得解讀：' + (data.error || '未知錯誤，請稍後再試。');
-            return;
-          }
-
-          statusEl.textContent =
-            '已由模型 ' + data.model + ' 完成解讀，你可以慢慢讀完這封信。';
-          resultEl.textContent = data.text;
-        } catch (err) {
-          console.error(err);
-          statusEl.textContent = '';
-          resultEl.textContent =
-            '連線後端時發生錯誤，請稍後再試一次。';
-        } finally {
-          btn.disabled = false;
-        }
-      });
-    }
-  </script>
-</body>
-</html>
+        <p>只需要提供你的出生時間與地點，我將為你解讀專屬於你的能量藍圖。</p>
+        <p>準備好了嗎？讓我們一起探索你的人類圖故事。</p>
+        <p class="muted">請提供準確的出生時間與地點。時間誤差建議在 ±30 分鐘內，
