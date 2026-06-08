@@ -5,6 +5,73 @@
   <title>人類圖故事簿 · 能量藍圖解讀</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
+    /* 封面照片翻頁動畫 */
+.cover {
+  margin: 12px 0 18px;
+  perspective: 1200px; /* 立體感 */
+}
+
+.cover-page {
+  position: relative;
+  width: 100%;
+  padding-top: 60%;          /* 4:3 比例，可自行調整 */
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.18),
+    0 0 0 1px rgba(255, 255, 255, 0.7);
+  transform-origin: left center;
+  transform: rotateY(-70deg) translateX(-18px);
+  opacity: 0;
+  animation: pageIn 900ms ease-out 120ms forwards;
+}
+
+/* 右側紙張厚度與陰影 */
+.cover-page::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -10px;
+  width: 18px;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0)
+  );
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.cover-page img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 滑鼠移過去微微再翻一次 */
+.cover-page:hover {
+  transform: rotateY(-8deg);
+  transition: transform 260ms ease-out;
+}
+
+/* 進場翻頁動畫 */
+@keyframes pageIn {
+  0% {
+    transform: rotateY(-70deg) translateX(-18px);
+    opacity: 0;
+  }
+  60% {
+    transform: rotateY(12deg) translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: rotateY(0deg) translateX(0);
+    opacity: 1;
+  }
+}
     :root {
       --bg: #f7f6f2;
       --card: #ffffff;
@@ -177,9 +244,19 @@
   <main>
     <article>
       <header>
-        <div class="eyebrow">HUMAN DESIGN STORYBOOK</div>
-        <h1>一場關於自我覺醒的繪本旅程</h1>
-      </header>
+  <div class="eyebrow">HUMAN DESIGN STORYBOOK</div>
+  <h1>一場關於自我覺醒的繪本旅程</h1>
+
+  <!-- 封面照片翻頁 -->
+  <figure class="cover">
+    <div class="cover-page">
+      <img
+        src="https://images.pexels.com/photos/7130475/pexels-photo-7130475.jpeg?auto=compress&cs=tinysrgb&w=1200"
+        alt="一張帶著光感的宇宙與書頁封面照片"
+      />
+    </div>
+  </figure>
+</header>
 
       <!-- 原本繪本文案 -->
       <section>
